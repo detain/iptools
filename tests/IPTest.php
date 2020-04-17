@@ -25,11 +25,11 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	/**
 	 * @dataProvider getTestContructorExceptionData
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Invalid IP address format
 	 */
 	public function testConstructorException($string)
 	{
+		$this->expectException(\Exception::class);
+		$this->exxpectExceptionMessage('Invalid IP address format');
 		$ip = new IP($string);
 	}
 
@@ -76,12 +76,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($bin, $ip->toBin());
 	}
 
-	/**
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Invalid binary IP address format
-	 */
 	public function testParseBinException()
 	{
+		$this->expectException(\Exception::class);
+		$this->exxpectExceptionMessage('Invalid binary IP address format');
 		IP::parseBin('192.168.1.1');
 	}
 
@@ -110,12 +108,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	}
 
-	/**
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Invalid hexadecimal IP address format
-	 */
 	public function testParseHexException()
 	{
+		$this->expectException(\Exception::class);
+		$this->exxpectExceptionMessage('Invalid hexadecimal IP address format');
 		IP::parseHex('192.168.1.1');
 	}
 
@@ -144,12 +140,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
 	}
 	
 
-	/**
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Number must be greater than 0
-	 */
 	public function testNextException()
 	{
+		$this->expectException(\Exception::class);
+		$this->exxpectExceptionMessage('Number must be greater than 0');
 		$object = new IP('192.168.1.0');
 		$next = $object->next(-1);
 	}
@@ -165,12 +159,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($expected, (string) $prev);
 	}
 
-	/**
-	 * @expectedException Exception
-	 * @expectedExceptionMessage Number must be greater than 0
-	 */
 	public function testPrevException()
 	{
+		$this->expectException(\Exception::class);
+		$this->exxpectExceptionMessage('Number must be greater than 0');
 		$object = new IP('192.168.1.1');
 		$object->prev(-1);
 	}

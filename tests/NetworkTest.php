@@ -41,12 +41,10 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, (string)Network::parse($data));
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Invalid IP address format
-     */
     public function testParseWrongNetwork()
     {
+	$this->expectException(\Exception::class);
+	$this->exxpectExceptionMessage('Invalid IP address format');
         Network::parse('10.0.0.0/24 abc');
     }
 
@@ -58,22 +56,20 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($mask, Network::prefix2netmask($prefix, $version));
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Wrong IP version
-     */
     public function testPrefix2MaskWrongIPVersion()
     {
+	$this->expectException(\Exception::class);
+	$this->exxpectExceptionMessage('Wrong IP version');
         Network::prefix2netmask('128', 'ip_version');
     }
 
     /**
      * @dataProvider getInvalidPrefixData
-     * @expectedException Exception
-     * @expectedExceptionMessage Invalid prefix length
      */
     public function testPrefix2MaskInvalidPrefix($prefix, $version)
     {
+	$this->expectException(\Exception::class);
+	$this->exxpectExceptionMessage('Invalid prefix length');
         Network::prefix2netmask($prefix, $version);
     }
 
@@ -105,11 +101,11 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getExcludeExceptionData
-     * @expectedException Exception
-     * @expectedExceptionMessage Exclude subnet not within target network
      */
     public function testExcludeException($data, $exclude)
     {
+	$this->expectException(\Exception::class);
+	$this->exxpectExceptionMessage('Exclude subnet not within target network');
         Network::parse($data)->exclude($exclude);
     }
 
@@ -129,11 +125,11 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getMoveToExceptionData
-     * @expectedException Exception
-     * @expectedExceptionMessage Invalid prefix length
      */
     public function testMoveToException($network, $prefixLength)
     {
+	$this->expectException(\Exception::class);
+	$this->exxpectExceptionMessage('Invalid prefix length');
         Network::parse($network)->moveTo($prefixLength);
     }
 

@@ -43,8 +43,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
 
     public function testParseWrongNetwork()
     {
-	$this->expectException(Exception::class);
-	$this->expectExceptionMessage('Invalid IP address format');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid IP address format');
         Network::parse('10.0.0.0/24 abc');
     }
 
@@ -56,10 +56,35 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($mask, Network::prefix2netmask($prefix, $version));
     }
 
+    public function testSetIPException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('IP version is not same as Netmask version');
+        $network = Network::parse('127.0.0.1/24');
+        $network->setIP(IP::parse('ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff'));
+    }
+
+    public function testSetNetmaskException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid Netmask address format');
+        $network = Network::parse('127.0.0.1/24');
+        $network->setNetmask(IP::parse('127.0.0.1'));
+    }
+
+    public function testSetNetmaskVersionException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Netmask version is not same as IP version');
+        $network = Network::parse('127.0.0.1/24');
+        $network->setNetmask(IP::parse('ffff:ffff:ffff:ffff::'));
+
+    }
+
     public function testPrefix2MaskWrongIPVersion()
     {
-	$this->expectException(Exception::class);
-	$this->expectExceptionMessage('Wrong IP version');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Wrong IP version');
         Network::prefix2netmask('128', 'ip_version');
     }
 
@@ -68,8 +93,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testPrefix2MaskInvalidPrefix($prefix, $version)
     {
-	$this->expectException(Exception::class);
-	$this->expectExceptionMessage('Invalid prefix length');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid prefix length');
         Network::prefix2netmask($prefix, $version);
     }
 
@@ -104,8 +129,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testExcludeException($data, $exclude)
     {
-	$this->expectException(Exception::class);
-	$this->expectExceptionMessage('Exclude subnet not within target network');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Exclude subnet not within target network');
         Network::parse($data)->exclude($exclude);
     }
 
@@ -128,8 +153,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testMoveToException($network, $prefixLength)
     {
-	$this->expectException(Exception::class);
-	$this->expectExceptionMessage('Invalid prefix length');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid prefix length');
         Network::parse($network)->moveTo($prefixLength);
     }
 

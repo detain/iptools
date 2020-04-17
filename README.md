@@ -2,15 +2,22 @@
 
 PHP Library for manipulating network addresses (IPv4 and IPv6).
 
-* Updates tests
-
 [![Build Status](https://travis-ci.org/detain/IPTools.svg)](https://travis-ci.org/detain/IPTools)
 [![Coverage Status](https://coveralls.io/repos/detain/IPTools/badge.svg?branch=master&service=github)](https://coveralls.io/github/detain/IPTools?branch=master)
 [![Code Climate](https://codeclimate.com/github/detain/IPTools/badges/gpa.svg)](https://codeclimate.com/github/detain/IPTools)
 
+[![PHP 5.6](https://img.shields.io/badge/PHP-5.6-8892BF.svg)](http://php.net)
+[![PHP 7.0](https://img.shields.io/badge/PHP-7.0-8892BF.svg)](http://php.net)
+[![PHP 7.1](https://img.shields.io/badge/PHP-7.1-8892BF.svg)](http://php.net)
 [![PHP 7.2](https://img.shields.io/badge/PHP-7.2-8892BF.svg)](http://php.net)
 [![PHP 7.3](https://img.shields.io/badge/PHP-7.3-8892BF.svg)](http://php.net)
 [![PHP 7.4](https://img.shields.io/badge/PHP-7.4-8892BF.svg)](http://php.net)
+
+## Changes since fork
+
+* 100% Code Coverage!
+* Now Testing On PHP v5.6, v7.0, v7.1, v7.2, v7.3, and v7.4
+* Added CodeClimate Coverage Reporting
 
 ## Installation
 Composer:

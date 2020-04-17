@@ -2,3 +2,17 @@ languages:
   PHP: true
 exclude_paths:
 - "tests/*"
+plugins:
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,inc,lib"
+      standard: "PSR1,PSR2"
+      ignore_warnings: true
+  phpmd:
+    enabled: true
+    config:
+      file_extensions: 
+        - php
+        - inc
+      rulesets: "unusedcode,codesize,naming,cleancode,design"

@@ -4,7 +4,7 @@ use IPTools\Range;
 use IPTools\Network;
 use IPTools\IP;
 
-class RangeTest extends \PHPUnit_Framework_TestCase
+class RangeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider getTestParseData

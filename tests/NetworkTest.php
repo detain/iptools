@@ -3,7 +3,7 @@
 use IPTools\Network;
 use IPTools\IP;
 
-class NetworkTest extends \PHPUnit_Framework_TestCase
+class NetworkTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructor()
     {

@@ -43,8 +43,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
 
     public function testParseWrongNetwork()
     {
-	$this->expectException(\Error::class);
-	$this->exxpectExceptionMessage('Invalid IP address format');
+	$this->expectException(Exception::class);
+	$this->expectExceptionMessage('Invalid IP address format');
         Network::parse('10.0.0.0/24 abc');
     }
 
@@ -58,8 +58,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
 
     public function testPrefix2MaskWrongIPVersion()
     {
-	$this->expectException(\Error::class);
-	$this->exxpectExceptionMessage('Wrong IP version');
+	$this->expectException(Exception::class);
+	$this->expectExceptionMessage('Wrong IP version');
         Network::prefix2netmask('128', 'ip_version');
     }
 
@@ -68,8 +68,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testPrefix2MaskInvalidPrefix($prefix, $version)
     {
-	$this->expectException(\Error::class);
-	$this->exxpectExceptionMessage('Invalid prefix length');
+	$this->expectException(Exception::class);
+	$this->expectExceptionMessage('Invalid prefix length');
         Network::prefix2netmask($prefix, $version);
     }
 
@@ -104,8 +104,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testExcludeException($data, $exclude)
     {
-	$this->expectException(\Error::class);
-	$this->exxpectExceptionMessage('Exclude subnet not within target network');
+	$this->expectException(Exception::class);
+	$this->expectExceptionMessage('Exclude subnet not within target network');
         Network::parse($data)->exclude($exclude);
     }
 
@@ -128,8 +128,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testMoveToException($network, $prefixLength)
     {
-	$this->expectException(\Error::class);
-	$this->exxpectExceptionMessage('Invalid prefix length');
+	$this->expectException(Exception::class);
+	$this->expectExceptionMessage('Invalid prefix length');
         Network::parse($network)->moveTo($prefixLength);
     }
 

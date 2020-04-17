@@ -28,7 +28,7 @@ class RangeTest extends \PHPUnit\Framework\TestCase
             $result[] = (string)$network;
         }
 
-        $this->assertEquals($expected, $result);        
+        $this->assertEquals($expected, $result);
     }
 
     /**
@@ -37,6 +37,27 @@ class RangeTest extends \PHPUnit\Framework\TestCase
     public function testContains($data, $find, $expected)
     {
         $this->assertEquals($expected, Range::parse($data)->contains(new IP($find)));
+    }
+
+    public function testContainsException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid type');
+        Range::parse('192.168.1.0/24')->contains(false);
+    }
+
+    public function testSetFirstIPException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('First IP is grater than second');
+        Range::parse('192.168.1.0/25')->setFirstIP(new IP('192.168.1.128'));
+    }
+
+    public function testSetLastIPException()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Last IP is less than first');
+        Range::parse('192.168.1.128/25')->setLastIP(new IP('192.168.1.127'));
     }
 
     /**
@@ -75,11 +96,11 @@ class RangeTest extends \PHPUnit\Framework\TestCase
             array('192.168.1.*', array('192.168.1.0/24')),
             array('192.168.1.208-192.168.1.255', array(
                 '192.168.1.208/28',
-                '192.168.1.224/27' 
+                '192.168.1.224/27'
             )),
             array('192.168.1.0-192.168.1.191', array(
                 '192.168.1.0/25',
-                '192.168.1.128/26' 
+                '192.168.1.128/26'
             )),
             array('192.168.1.125-192.168.1.126', array(
                 '192.168.1.125/32',
@@ -95,7 +116,7 @@ class RangeTest extends \PHPUnit\Framework\TestCase
             array('192.168.*.*', '192.169.255.255', false),
 
             /**
-             * 10.10.45.48 --> 00001010 00001010 00101101 00110000 
+             * 10.10.45.48 --> 00001010 00001010 00101101 00110000
              * the last 0000 leads error
              */
             array('10.10.45.48/28', '10.10.45.58', true),
@@ -108,7 +129,7 @@ class RangeTest extends \PHPUnit\Framework\TestCase
     public function getTestIterationData()
     {
         return array(
-            array('192.168.2.0-192.168.2.7', 
+            array('192.168.2.0-192.168.2.7',
                 array(
                     '192.168.2.0',
                     '192.168.2.1',

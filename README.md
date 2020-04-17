@@ -2,6 +2,8 @@
 
 PHP Library for manipulating network addresses (IPv4 and IPv6).
 
+* Updates tests
+
 [![Build Status](https://travis-ci.org/detain/IPTools.svg)](https://travis-ci.org/detain/IPTools)
 [![Coverage Status](https://coveralls.io/repos/detain/IPTools/badge.svg?branch=master&service=github)](https://coveralls.io/github/detain/IPTools?branch=master)
 [![Code Climate](https://codeclimate.com/github/detain/IPTools/badges/gpa.svg)](https://codeclimate.com/github/detain/IPTools)

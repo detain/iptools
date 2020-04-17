@@ -6,21 +6,22 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 [![Coverage Status](https://coveralls.io/repos/detain/IPTools/badge.svg?branch=master&service=github)](https://coveralls.io/github/detain/IPTools?branch=master)
 [![Code Climate](https://codeclimate.com/github/detain/IPTools/badges/gpa.svg)](https://codeclimate.com/github/detain/IPTools)
 
-[![PHP 5.4](https://img.shields.io/badge/PHP-5.4-8892BF.svg)](http://php.net)
-[![PHP 7.0](https://img.shields.io/badge/PHP-7.0-8892BF.svg)](http://php.net)
+[![PHP 7.2](https://img.shields.io/badge/PHP-7.2-8892BF.svg)](http://php.net)
+[![PHP 7.3](https://img.shields.io/badge/PHP-7.3-8892BF.svg)](http://php.net)
+[![PHP 7.4](https://img.shields.io/badge/PHP-7.4-8892BF.svg)](http://php.net)
 
 ## Installation
 Composer:
 Run in command line:
 ```
-composer require s1lentium/iptools
+composer require detain/iptools
 ```
 or put in composer.json:
 ```json
 {
-    "require": {
-        "s1lentium/iptools": "*"
-    }
+	"require": {
+		"detain/iptools": "*"
+	}
 }
 ```
 

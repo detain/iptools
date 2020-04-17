@@ -14,7 +14,7 @@
         "ext-bcmath": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "~1.0",
+        "satooshi/php-coveralls": "*",
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {

@@ -3,7 +3,7 @@ namespace IPTools;
 
 /**
  * @author Safarov Alisher <alisher.safarov@outlook.com>
- * @link https://github.com/S1lentium/IPTools
+ * @link https://github.com/detain/IPTools
  */
 class IP
 {

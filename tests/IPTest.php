@@ -28,7 +28,7 @@ class IPTest extends \PHPUnit\Framework\TestCase
 	 */
 	public function testConstructorException($string)
 	{
-		$this->expectException();
+		$this->expectException(\Error::class);
 		$this->exxpectExceptionMessage('Invalid IP address format');
 		$ip = new IP($string);
 	}
@@ -78,7 +78,7 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	public function testParseBinException()
 	{
-		$this->expectException();
+		$this->expectException(\Error::class);
 		$this->exxpectExceptionMessage('Invalid binary IP address format');
 		IP::parseBin('192.168.1.1');
 	}
@@ -110,7 +110,7 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	public function testParseHexException()
 	{
-		$this->expectException();
+		$this->expectException(\Error::class);
 		$this->exxpectExceptionMessage('Invalid hexadecimal IP address format');
 		IP::parseHex('192.168.1.1');
 	}
@@ -142,7 +142,7 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	public function testNextException()
 	{
-		$this->expectException();
+		$this->expectException(\Error::class);
 		$this->exxpectExceptionMessage('Number must be greater than 0');
 		$object = new IP('192.168.1.0');
 		$next = $object->next(-1);
@@ -161,7 +161,7 @@ class IPTest extends \PHPUnit\Framework\TestCase
 
 	public function testPrevException()
 	{
-		$this->expectException();
+		$this->expectException(\Error::class);
 		$this->exxpectExceptionMessage('Number must be greater than 0');
 		$object = new IP('192.168.1.1');
 		$object->prev(-1);

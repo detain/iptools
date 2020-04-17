@@ -5,15 +5,20 @@
     "keywords": ["IP-Tools", "network", "subnet", "cidr", "IP", "IPv4", "IPv6"],
     "license": "MIT",
     "authors": [{
+        "name": "Joe Huss",
+        "email": "detain@interserver.net",
+        "homepage": "https://github.com/detain"
+    },{
         "name": "Safarov Alisher",
         "email": "alisher.safarov@outlook.com",
-        "homepage": "https://github.com/detain"
+        "homepage": "https://github.com/S1lentium"
     }],
     "require": {
         "php": ">=5.4.0",
         "ext-bcmath": "*"
     },
     "require-dev": {
+        "codeclimate/php-test-reporter": "*",
         "satooshi/php-coveralls": "~1.0",
         "phpunit/phpunit": ">=5.2"
     },

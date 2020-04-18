@@ -46,7 +46,12 @@ class RangeTest extends \PHPUnit\Framework\TestCase
 	{
 		$findArray = [];
 		foreach ($find as $item) {
-			$findArray[] = new IP($item);
+			$itemRange = Range::parse($item);
+			if ($itemRange->count() == 1) {
+				$findArray[] = new IP($item);
+			} else {
+				$findArray[] = $itemRange;
+			}            
 		}
 		$this->assertEquals($expected, Range::parse($data)->containsAny($findArray));
 	}
@@ -58,7 +63,12 @@ class RangeTest extends \PHPUnit\Framework\TestCase
 	{
 		$findArray = [];
 		foreach ($find as $item) {
-			$findArray[] = new IP($item);
+			$itemRange = Range::parse($item);
+			if ($itemRange->count() == 1) {
+				$findArray[] = new IP($item);
+			} else {
+				$findArray[] = $itemRange;
+			}			
 		}
 		$this->assertEquals($expected, Range::parse($data)->containsAll($findArray));
 	}
@@ -154,6 +164,9 @@ class RangeTest extends \PHPUnit\Framework\TestCase
 	{
 		return array(
 			array('192.168.*.*', ['193.168.245.1', '194.168.246.15', '192.168.245.16'], true),
+			array('192.168.*.*', ['192.168.245.2/24', '192.168.245.1/24', '192.168.245.0/24'], true),
+			array('192.168.*.*', ['193.168.245.1', '194.168.246.15', '192.168.245.0/24'], true),
+			array('192.168.*.*', ['193.168.245.1', '194.168.246.15', '193.168.245.0/24'], false),
 			array('192.168.*.*', ['193.168.245.1', '192.168.245.15', '194.168.245.16'], true),
 			array('192.168.*.*', ['196.168.245.1', '195.168.245.15', '194.168.245.16'], false),
 			array('192.168.0.0/16', ['193.168.245.1', '194.168.246.15', '192.168.245.16'], true),
@@ -166,6 +179,9 @@ class RangeTest extends \PHPUnit\Framework\TestCase
 	{
 		return array(
 			array('192.168.*.*', ['192.168.245.1', '192.168.246.15', '192.168.245.16'], true),
+			array('192.168.*.*', ['192.168.245.2/24', '192.168.245.1/24', '192.168.245.0/24'], true),
+			array('192.168.*.*', ['192.168.245.1', '192.168.246.15', '192.168.245.0/24'], true),
+			array('192.168.*.*', ['192.168.245.1', '192.168.246.15', '193.168.245.0/24'], false),
 			array('192.168.*.*', ['193.168.245.1', '192.168.245.15', '194.168.245.16'], false),
 			array('192.168.*.*', ['196.168.245.1', '195.168.245.15', '194.168.245.16'], false),
 			array('192.168.0.0/16', ['192.168.245.1', '192.168.246.15', '192.168.245.16'], true),

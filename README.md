@@ -18,8 +18,10 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 * 100% Code Coverage!
 * Now Testing On PHP v5.6, v7.0, v7.1, v7.2, v7.3, and v7.4
 * Added CodeClimate Coverage Reporting
-
+* Added containsAny and containsAll to Range class for dealing with an array of IP/Range/Networks instead of a single one
+ 
 ## Installation
+
 Composer:
 Run in command line:
 ```
@@ -160,6 +162,7 @@ echo count(Network::parse('192.168.1.0/24')) // 254
 ```
 
 ### Range Operations
+
 **Define the range in different formats:**
 ```php
 $range = new Range(new IP('192.168.1.0'), new IP('192.168.1.255'));
@@ -167,10 +170,22 @@ $range = Range::parse('192.168.1.0-192.168.1.255');
 $range = Range::parse('192.168.1.*');
 $range = Range::parse('192.168.1.0/24');
 ```
+
 **Check if IP is within Range:**
 ```php
 echo Range::parse('192.168.1.1-192.168.1.254')->contains(new IP('192.168.1.5')); // true
 echo Range::parse('::1-::ffff')->contains(new IP('::1234')); // true
+```
+
+**Check if IP is within any of the Ranges in an array:**
+```php
+echo Range::parse('192.168.1.1-192.168.1.254')->containsAny([new IP('192.168.0.5'), new IP('192.168.1.5')]); // true
+```
+
+**Check if IP is within all of the Ranges in an array:**
+```php
+echo Range::parse('192.168.1.1-192.168.1.254')->containsAll([new IP('192.168.0.5'), new IP('192.168.1.5')]); // false
+echo Range::parse('192.168.1.1-192.168.1.254')->containsAll([new IP('192.168.1.6'), new IP('192.168.1.5')]); // true
 ```
 
 **Iterate over Range IP adresses:**

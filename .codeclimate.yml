@@ -21,8 +21,7 @@ checks:
   Naming/ShortVariable:
     enabled: false
   Design/TooManyPublicMethods:
-    config:
-      threshold: 25
+    threshold: 25
   argument-count:
     config:
       threshold: 4

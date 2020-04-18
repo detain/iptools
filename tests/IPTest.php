@@ -30,20 +30,20 @@ class IPTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid IP address format');
-        $ipAddress = new IP($string);
+        $ip = new IP($string);
     }
 
     public function testProperties()
     {
-        $ipAddress = new IP('127.0.0.1');
+        $ip = new IP('127.0.0.1');
 
-        $this->assertNotEmpty($ipAddress->maxPrefixLength);
-        $this->assertNotEmpty($ipAddress->octetsCount);
-        $this->assertNotEmpty($ipAddress->reversePointer);
+        $this->assertNotEmpty($ip->maxPrefixLength);
+        $this->assertNotEmpty($ip->octetsCount);
+        $this->assertNotEmpty($ip->reversePointer);
 
-        $this->assertNotEmpty($ipAddress->bin);
-        $this->assertNotEmpty($ipAddress->long);
-        $this->assertNotEmpty($ipAddress->hex);
+        $this->assertNotEmpty($ip->bin);
+        $this->assertNotEmpty($ip->long);
+        $this->assertNotEmpty($ip->hex);
     }
 
     /**
@@ -51,8 +51,8 @@ class IPTest extends \PHPUnit\Framework\TestCase
      */
     public function testToString($actual, $expected)
     {
-        $ipAddress = new IP($actual);
-        $this->assertEquals($expected, (string)$ipAddress);
+        $ip = new IP($actual);
+        $this->assertEquals($expected, (string)$ip);
 
     }
 
@@ -61,8 +61,8 @@ class IPTest extends \PHPUnit\Framework\TestCase
      */
     public function testParse($ipString, $expected)
     {
-        $ipAddress = IP::parse($ipString);
-        $this->assertEquals($expected, (string) $ipAddress);
+        $ip = IP::parse($ipString);
+        $this->assertEquals($expected, (string) $ip);
     }
 
     /**
@@ -70,10 +70,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
      */
     public function testParseBin($bin, $expectedString)
     {
-        $ipAddress = IP::parseBin($bin);
+        $ip = IP::parseBin($bin);
 
-        $this->assertEquals($expectedString, (string) $ipAddress);
-        $this->assertEquals($bin, $ipAddress->toBin());
+        $this->assertEquals($expectedString, (string) $ip);
+        $this->assertEquals($bin, $ip->toBin());
     }
 
     public function testParseBinException()
@@ -101,10 +101,10 @@ class IPTest extends \PHPUnit\Framework\TestCase
     public function testParseHex()
     {
         $hex = '7f000001';
-        $ipAddress = IP::parseHex($hex);
+        $ip = IP::parseHex($hex);
 
-        $this->assertEquals('127.0.0.1', (string)$ipAddress);
-        $this->assertEquals($hex, $ipAddress->toHex());
+        $this->assertEquals('127.0.0.1', (string)$ip);
+        $this->assertEquals($hex, $ip->toHex());
 
     }
 
@@ -118,22 +118,22 @@ class IPTest extends \PHPUnit\Framework\TestCase
     public function testParseInAddr()
     {
         $inAddr = inet_pton('127.0.0.1');
-        $ipAddress = IP::parseInAddr($inAddr);
+        $ip = IP::parseInAddr($inAddr);
 
-        $this->assertEquals($inAddr, $ipAddress->inAddr());
+        $this->assertEquals($inAddr, $ip->inAddr());
 
         $inAddr = inet_pton('2001::8000:0:0:0');
-        $ipAddress = IP::parseInAddr($inAddr);
+        $ip = IP::parseInAddr($inAddr);
 
-        $this->assertEquals($inAddr, $ipAddress->inAddr());
+        $this->assertEquals($inAddr, $ip->inAddr());
     }
 
     /**
      * @dataProvider getTestNextData
      */
-    public function testNext($ipAddress, $step, $expected)
+    public function testNext($ip, $step, $expected)
     {
-        $object = new IP($ipAddress);
+        $object = new IP($ip);
         $next = $object->next($step);
 
         $this->assertEquals($expected, (string) $next);
@@ -151,9 +151,9 @@ class IPTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider getTestPrevData
      */
-    public function testPrev($ipAddress, $step, $expected)
+    public function testPrev($ip, $step, $expected)
     {
-        $object = new IP($ipAddress);
+        $object = new IP($ip);
         $prev = $object->prev($step);
 
         $this->assertEquals($expected, (string) $prev);
@@ -170,9 +170,9 @@ class IPTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider getReversePointerData
      */
-    public function testReversePointer($ipAddress, $expected)
+    public function testReversePointer($ip, $expected)
     {
-        $object = new IP($ipAddress);
+        $object = new IP($ip);
         $reversePointer = $object->getReversePointer();
         $this->assertEquals($expected, $reversePointer);
     }

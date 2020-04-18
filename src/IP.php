@@ -24,15 +24,15 @@ class IP
     private $in_addr;
 
     /**
-     * @param string $ipAddress
+     * @param string ip
      * @throws \Exception
      */
-    public function __construct($ipAddress)
+    public function __construct($ip)
     {
-        if (!filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
             throw new \Exception("Invalid IP address format");
         }
-        $this->in_addr = inet_pton($ipAddress);
+        $this->in_addr = inet_pton($ip);
     }
 
     /**
@@ -44,26 +44,26 @@ class IP
     }
 
     /**
-     * @param string $ipAddress
+     * @param string ip
      * @return IP
      */
-    public static function parse($ipAddress)
+    public static function parse($ip)
     {
-        if (strpos($ipAddress, '0x') === 0) {
-            $ipAddress = substr($ipAddress, 2);
-            return self::parseHex($ipAddress);
+        if (strpos($ip, '0x') === 0) {
+            $ip = substr($ip, 2);
+            return self::parseHex($ip);
         }
 
-        if (strpos($ipAddress, '0b') === 0) {
-            $ipAddress = substr($ipAddress, 2);
-            return self::parseBin($ipAddress);
+        if (strpos($ip, '0b') === 0) {
+            $ip = substr($ip, 2);
+            return self::parseBin($ip);
         }
 
-        if (is_numeric($ipAddress)) {
-            return self::parseLong($ipAddress);
+        if (is_numeric($ip)) {
+            return self::parseLong($ip);
         }
 
-        return new self($ipAddress);
+        return new self($ip);
     }
 
     /**
@@ -106,17 +106,17 @@ class IP
     public static function parseLong($longIP, $version=self::IP_V4)
     {
         if ($version === self::IP_V4) {
-            $ipAddress = new self(long2ip($longIP));
+            $ip = new self(long2ip($longIP));
         } else {
             $binary = array();
             for ($i = 0; $i < self::IP_V6_OCTETS; $i++) {
                 $binary[] = bcmod($longIP, 256);
                 $longIP = bcdiv($longIP, 256, 0);
             }
-            $ipAddress = new self(inet_ntop(call_user_func_array('pack', array_merge(array('C*'), array_reverse($binary)))));
+            $ip = new self(inet_ntop(call_user_func_array('pack', array_merge(array('C*'), array_reverse($binary)))));
         }
 
-        return $ipAddress;
+        return $ip;
     }
 
     /**

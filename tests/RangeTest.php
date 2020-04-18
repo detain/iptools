@@ -65,8 +65,8 @@ class RangeTest extends \PHPUnit\Framework\TestCase
      */
     public function testRangeIteration($data, $expected)
     {
-        foreach (Range::parse($data) as $key => $ipAddress) {
-           $result[] = (string)$ipAddress;
+        foreach (Range::parse($data) as $key => $ip) {
+           $result[] = (string)$ip;
         }
 
         $this->assertEquals($expected, $result);

@@ -12,7 +12,7 @@ class Network implements \Iterator, \Countable
     /**
      * @var IP
      */
-    private $ipAddress;
+    private $ip;
     /**
      * @var IP
      */
@@ -23,12 +23,12 @@ class Network implements \Iterator, \Countable
     private $position = 0;
 
     /**
-     * @param IP $ipAddress
+     * @param IP $ip
      * @param IP $netmask
      */
-    public function __construct(IP $ipAddress, IP $netmask)
+    public function __construct(IP $ip, IP $netmask)
     {
-        $this->setIP($ipAddress);
+        $this->setIP($ip);
         $this->setNetmask($netmask);
     }
 
@@ -48,18 +48,18 @@ class Network implements \Iterator, \Countable
     public static function parse($data)
     {
         if (preg_match('~^(.+?)/(\d+)$~', $data, $matches)) {
-            $ipAddress      = IP::parse($matches[1]);
-            $netmask = self::prefix2netmask((int)$matches[2], $ipAddress->getVersion());
+            $ip      = IP::parse($matches[1]);
+            $netmask = self::prefix2netmask((int)$matches[2], $ip->getVersion());
         } elseif (strpos($data,' ')) {
-            list($ipAddress, $netmask) = explode(' ', $data, 2);
-            $ipAddress      = IP::parse($ipAddress);
+            list($ip, $netmask) = explode(' ', $data, 2);
+            $ip      = IP::parse($ip);
             $netmask = IP::parse($netmask);
         } else {
-            $ipAddress      = IP::parse($data);
-            $netmask = self::prefix2netmask($ipAddress->getMaxPrefixLength(), $ipAddress->getVersion());
+            $ip      = IP::parse($data);
+            $netmask = self::prefix2netmask($ip->getMaxPrefixLength(), $ip->getVersion());
         }
 
-        return new self($ipAddress, $netmask);
+        return new self($ip, $netmask);
     }
 
     /**
@@ -90,42 +90,42 @@ class Network implements \Iterator, \Countable
     }
 
     /**
-     * @param IP $ipAddress
+     * @param IP ip
      * @return int
      */
-    public static function netmask2prefix(IP $ipAddress)
+    public static function netmask2prefix(IP $ip)
     {
-        return strlen(rtrim($ipAddress->toBin(), 0));
+        return strlen(rtrim($ip->toBin(), 0));
     }
 
     /**
-     * @param IP $ipAddress
+     * @param IP ip
      * @throws \Exception
      */
-    public function setIP(IP $ipAddress)
+    public function setIP(IP $ip)
     {
-        if (isset($this->netmask) && $this->netmask->getVersion() !== $ipAddress->getVersion()) {
+        if (isset($this->netmask) && $this->netmask->getVersion() !== $ip->getVersion()) {
             throw new \Exception('IP version is not same as Netmask version');
         }
 
-        $this->ip = $ipAddress;
+        $this->ip = $ip;
     }
 
     /**
-     * @param IP $ipAddress
+     * @param IP ip
      * @throws \Exception
      */
-    public function setNetmask(IP $ipAddress)
+    public function setNetmask(IP $ip)
     {
-        if (!preg_match('/^1*0*$/',$ipAddress->toBin())) {
+        if (!preg_match('/^1*0*$/',$ip->toBin())) {
             throw new \Exception('Invalid Netmask address format');
         }
 
-        if (isset($this->ip) && $ipAddress->getVersion() !== $this->ip->getVersion()) {
+        if (isset($this->ip) && $ip->getVersion() !== $this->ip->getVersion()) {
             throw new \Exception('Netmask version is not same as IP version');
         }
 
-        $this->netmask = $ipAddress;
+        $this->netmask = $ip;
     }
 
     /**

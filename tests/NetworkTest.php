@@ -103,8 +103,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testHosts($data, $expected)
     {
-        foreach(Network::parse($data)->getHosts as $ip) {
-            $result[] = (string)$ip;
+        foreach(Network::parse($data)->getHosts as $ipAddress) {
+            $result[] = (string)$ipAddress;
         }
 
         $this->assertEquals($expected, $result);
@@ -163,8 +163,8 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
      */
     public function testNetworkIteration($data, $expected)
     {
-        foreach (Network::parse($data) as $key => $ip) {
-           $result[] = (string)$ip;
+        foreach (Network::parse($data) as $key => $ipAddress) {
+           $result[] = (string)$ipAddress;
         }
 
         $this->assertEquals($expected, $result);

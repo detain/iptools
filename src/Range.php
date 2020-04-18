@@ -82,29 +82,29 @@ class Range implements \Iterator, \Countable
     }
 
     /**
-     * @param IP $ip
+     * @param IP $ipAddress
      * @throws \Exception
      */
-    public function setFirstIP(IP $ip)
+    public function setFirstIP(IP $ipAddress)
     {
-        if ($this->lastIP && strcmp($ip->inAddr(), $this->lastIP->inAddr()) > 0) {
+        if ($this->lastIP && strcmp($ipAddress->inAddr(), $this->lastIP->inAddr()) > 0) {
             throw new \Exception('First IP is grater than second');
         }
 
-        $this->firstIP = $ip;
+        $this->firstIP = $ipAddress;
     }
 
     /**
-     * @param IP $ip
+     * @param IP $ipAddress
      * @throws \Exception
      */
-    public function setLastIP(IP $ip)
+    public function setLastIP(IP $ipAddress)
     {
-        if ($this->firstIP && strcmp($ip->inAddr(), $this->firstIP->inAddr()) < 0) {
+        if ($this->firstIP && strcmp($ipAddress->inAddr(), $this->firstIP->inAddr()) < 0) {
             throw new \Exception('Last IP is less than first');
         }
 
-        $this->lastIP = $ip;
+        $this->lastIP = $ipAddress;
     }
 
     /**
@@ -178,9 +178,9 @@ class Range implements \Iterator, \Countable
 
         $prefixLength = strlen($match[1]);
 
-        $ip = IP::parseBin(str_pad(substr($this->getFirstIP()->toBin(), 0, $prefixLength), $xorIP->getMaxPrefixLength(), '0'));
+        $ipAddress = IP::parseBin(str_pad(substr($this->getFirstIP()->toBin(), 0, $prefixLength), $xorIP->getMaxPrefixLength(), '0'));
 
-        return new Network($ip, Network::prefix2netmask($prefixLength, $ip->getVersion()));
+        return new Network($ipAddress, Network::prefix2netmask($prefixLength, $ipAddress->getVersion()));
     }
 
     /**

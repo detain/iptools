@@ -106,8 +106,6 @@ class Range implements \Iterator, \Countable
 				 */
 				$within = (strcmp($find->getFirstIP()->inAddr(), $this->firstIP->inAddr()) >= 0)
 					&& (strcmp($find->getLastIP()->inAddr(), $this->lastIP->inAddr()) <= 0);
-			} else {
-				throw new \Exception('Invalid type '.var_export($find,true));
 			}
 			if ($within) {
 				return true;
@@ -138,8 +136,6 @@ class Range implements \Iterator, \Countable
 				 */
 				$within = (strcmp($find->getFirstIP()->inAddr(), $this->firstIP->inAddr()) >= 0)
 					&& (strcmp($find->getLastIP()->inAddr(), $this->lastIP->inAddr()) <= 0);
-			} else {
-				throw new \Exception('Invalid type '.var_export($find,true));
 			}
 			if (!$within) {
 				return false;

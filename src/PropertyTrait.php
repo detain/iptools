@@ -41,5 +41,4 @@ trait PropertyTrait
         }
         $this->$method($value);
     }
-
 }

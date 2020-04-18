@@ -163,5 +163,4 @@ class RangeTest extends \PHPUnit\Framework\TestCase
             array('2001:db8::/120', 256),
         );
     }
-
 }

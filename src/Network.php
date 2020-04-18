@@ -361,5 +361,4 @@ class Network implements \Iterator, \Countable
     {
         return (integer)$this->getBlockSize();
     }
-
 }

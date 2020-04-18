@@ -224,5 +224,4 @@ class Range implements \Iterator, \Countable
     {
         return (integer)bcadd(bcsub($this->lastIP->toLong(), $this->firstIP->toLong()), 1);
     }
-
 }

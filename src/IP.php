@@ -282,5 +282,4 @@ class IP
 
         return new self(inet_ntop(call_user_func_array('pack', array_merge(array('C*'), $unpacked))));
     }
-
 }

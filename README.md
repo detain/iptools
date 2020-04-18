@@ -2,9 +2,9 @@
 
 PHP Library for manipulating network addresses (IPv4 and IPv6).
 
-[![Build Status](https://travis-ci.org/detain/IPTools.svg)](https://travis-ci.org/detain/IPTools)
-[![Coverage Status](https://coveralls.io/repos/github/detain/IPTools/badge.svg?branch=master)](https://coveralls.io/github/detain/IPTools?branch=master)
-[![Code Climate](https://codeclimate.com/github/detain/IPTools/badges/gpa.svg)](https://codeclimate.com/github/detain/IPTools)
+[![Build Status](https://travis-ci.org/detain/iptools.svg)](https://travis-ci.org/detain/iptools)
+[![Coverage Status](https://coveralls.io/repos/github/detain/iptools/badge.svg?branch=master)](https://coveralls.io/github/detain/iptools?branch=master)
+[![Code Climate](https://codeclimate.com/github/detain/iptools/badges/gpa.svg)](https://codeclimate.com/github/detain/iptools)
 
 [![PHP 5.6](https://img.shields.io/badge/PHP-5.6-8892BF.svg)](http://php.net)
 [![PHP 7.0](https://img.shields.io/badge/PHP-7.0-8892BF.svg)](http://php.net)
@@ -19,6 +19,7 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 * Now Testing On PHP v5.6, v7.0, v7.1, v7.2, v7.3, and v7.4
 * Added CodeClimate Coverage Reporting
 * Added containsAny and containsAll to Range class for dealing with an array of IP/Range/Networks instead of a single one
+* Added excludeArray to the Network class for dealing iwth an array of IP/Range/Networks to exclude instead of the single one with the existing exclude method
  
 ## Installation
 
@@ -37,6 +38,8 @@ or put in composer.json:
 ```
 
 ## Usage
+
+This library breaks its handling down into *IP*, *Range*, and *Network* types and provdes a matching named class to make working with all things IP much simpler.
 
 ### IP Operations
 ```php

@@ -2,8 +2,9 @@
 namespace IPTools;
 
 /**
+ * @author Joe Huss <detain@interserver.net>
  * @author Safarov Alisher <alisher.safarov@outlook.com>
- * @link https://github.com/detain/IPTools
+ * @link https://github.com/detain/iptools
  */
 class IP
 {

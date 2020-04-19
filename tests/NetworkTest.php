@@ -125,6 +125,20 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @dataProvider getExcludeArrayData
+     */
+    public function testExcludeArray($data, $exclude, $expected)
+    {
+        $result = array();
+
+        foreach(Network::parse($data)->excludeArray($exclude) as $network) {
+            $result[] = (string)$network;
+        }
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
      * @dataProvider getExcludeExceptionData
      */
     public function testExcludeException($data, $exclude)
@@ -237,6 +251,24 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
                 )
             ),
             array('192.0.2.2/32', '192.0.2.2/32', array()),
+        );
+    }
+
+    public function getExcludeArrayData()
+    {
+        return array(
+            array('192.0.2.0/28',
+                array(
+                    '192.0.2.0/32',
+                    '192.0.2.1/32',
+                ),
+                array(
+                    '192.0.2.2/31',
+                    '192.0.2.4/30',
+                    '192.0.2.8/29',
+                )
+            ),
+            array('192.0.2.2/32', ['192.0.2.2/32'], array()),
         );
     }
 

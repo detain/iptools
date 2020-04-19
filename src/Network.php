@@ -249,8 +249,9 @@ class Network implements \Iterator, \Countable
      */
     public function exclude($exclude)
     {
-        $exclude = self::parse($exclude);
-
+        if ($exclude instanceof Network == false) {
+            $exclude = self::parse($exclude);
+        }
         if (strcmp($exclude->getFirstIP()->inAddr(), $this->getLastIP()->inAddr()) > 0
             || strcmp($exclude->getLastIP()->inAddr(), $this->getFirstIP()->inAddr()) < 0
         ) {
@@ -291,6 +292,34 @@ class Network implements \Iterator, \Countable
 
         sort($networks);
 
+        return $networks;
+    }
+
+    /**
+     * Excludes an array of IP/Network/Range from the network and reutrn an array of leftover networks
+     *
+     * @param array $excludeArray
+     * @return Network[]
+     * @throws \Exception
+     */
+    public function excludeArray($excludeArray)
+    {
+        $networks = [$this];
+        foreach ($excludeArray as $exclude) {
+            $exclude = self::parse($exclude);
+            foreach ($networks as $idx => $network) {
+                if (!(strcmp($exclude->getFirstIP()->inAddr(), $this->getLastIP()->inAddr()) > 0
+                    || strcmp($exclude->getLastIP()->inAddr(), $this->getFirstIP()->inAddr()) < 0
+                )) {
+                    $newNetworks = $network->exclude($exclude);
+                    unset($networks[$idx]);
+                    $bothNetworks = array_merge($networks, $newNetworks);
+                    $networks = $bothNetworks;
+                    break;
+                }
+            }
+        }
+        sort($networks);
         return $networks;
     }
 

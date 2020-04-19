@@ -6,6 +6,14 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 [![Coverage Status](https://coveralls.io/repos/github/detain/iptools/badge.svg?branch=master)](https://coveralls.io/github/detain/iptools?branch=master)
 [![Code Climate](https://codeclimate.com/github/detain/iptools/badges/gpa.svg)](https://codeclimate.com/github/detain/iptools)
 
+[![Latest Stable Version](https://poser.pugx.org/detain/iptools/version)](https://packagist.org/packages/detain/iptools)
+[![Total Downloads](https://poser.pugx.org/detain/iptools/downloads)](https://packagist.org/packages/detain/iptools)
+[![Latest Unstable Version](https://poser.pugx.org/detain/iptools/v/unstable)](//packagist.org/packages/detain/iptools)
+[![License](https://poser.pugx.org/detain/iptools/license)](https://packagist.org/packages/detain/iptools)
+[![Monthly Downloads](https://poser.pugx.org/detain/iptools/d/monthly)](https://packagist.org/packages/detain/iptools)
+[![Daily Downloads](https://poser.pugx.org/detain/iptools/d/daily)](https://packagist.org/packages/detain/iptools)
+[![composer.lock available](https://poser.pugx.org/detain/iptools/composerlock)](https://packagist.org/packages/detain/iptools)
+
 [![PHP 5.6](https://img.shields.io/badge/PHP-5.6-8892BF.svg)](http://php.net)
 [![PHP 7.0](https://img.shields.io/badge/PHP-7.0-8892BF.svg)](http://php.net)
 [![PHP 7.1](https://img.shields.io/badge/PHP-7.1-8892BF.svg)](http://php.net)

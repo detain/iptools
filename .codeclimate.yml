@@ -15,13 +15,14 @@ plugins:
         - php
         - inc
       rulesets: "unusedcode,codesize,naming,cleancode,design"
+      checks:
+        Naming/ShortVariable:
+          enabled: false
+        Design/TooManyPublicMethods:
+          enabled: false
 exclude_paths:
 - "tests/*"
 checks:
-  Naming/ShortVariable:
-    enabled: false
-  Design/TooManyPublicMethods:
-    enabled: false
   argument-count:
     config:
       threshold: 4

@@ -27,7 +27,7 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 * Now Testing On PHP v5.6, v7.0, v7.1, v7.2, v7.3, and v7.4
 * Added CodeClimate Coverage Reporting
 * Added containsAny and containsAll to Range class for dealing with an array of IP/Range/Networks instead of a single one
-* Added excludeArray to the Network class for dealing iwth an array of IP/Range/Networks to exclude instead of the single one with the existing exclude method
+* Added excludeArray to the Network class for dealing with an array of IP/Range/Networks to exclude instead of the single one with the existing exclude method
  
 ## Installation
 
@@ -130,6 +130,21 @@ foreach($excluded as $network) {
 	192.160.0.0/13
 	192.168.0.0/24
 	192.168.2.0/23
+	...
+	192.192.0.0/10
+
+**Exclude Many Subnets from Network:**
+```php
+$excluded = Network::parse('192.0.0.0/8')->excludeArray(['192.168.1.0/24', '192.168.2.0/24']);
+foreach($excluded as $network) {
+	echo (string)$network . '<br>';
+}
+```
+	192.0.0.0/9
+	192.128.0.0/11
+	192.160.0.0/13
+	192.168.0.0/24
+	192.168.3.0/23
 	...
 	192.192.0.0/10
 

@@ -1,6 +1,8 @@
 <?php
 namespace IPTools;
 
+use IPTools\Exception\RangeException;
+
 /**
  * @author Joe Huss <detain@interserver.net>
  * @author Safarov Alisher <alisher.safarov@outlook.com>
@@ -26,7 +28,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @param IP $firstIP
 	 * @param IP $lastIP
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function __construct(IP $firstIP, IP $lastIP)
 	{
@@ -62,7 +64,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @param IP|Network|Range $find
 	 * @return bool
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function contains($find)
 	{
@@ -79,7 +81,7 @@ class Range implements \Iterator, \Countable
 			$within = (strcmp($find->getFirstIP()->inAddr(), $this->firstIP->inAddr()) >= 0)
 				&& (strcmp($find->getLastIP()->inAddr(), $this->lastIP->inAddr()) <= 0);
 		} else {
-			throw new \Exception('Invalid type');
+			throw new RangeException('Invalid type');
 		}
 
 		return $within;
@@ -90,7 +92,7 @@ class Range implements \Iterator, \Countable
 	 * 
 	 * @param array $findArray
 	 * @return bool
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function containsAny($findArray)
 	{
@@ -120,7 +122,7 @@ class Range implements \Iterator, \Countable
 	 * 
 	 * @param array $findArray
 	 * @return bool
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function containsAll($findArray)
 	{
@@ -147,12 +149,12 @@ class Range implements \Iterator, \Countable
 
 	/**
 	 * @param IP $ip
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function setFirstIP(IP $ip)
 	{
 		if ($this->lastIP && strcmp($ip->inAddr(), $this->lastIP->inAddr()) > 0) {
-			throw new \Exception('First IP is grater than second');
+			throw new RangeException('First IP is grater than second');
 		}
 
 		$this->firstIP = $ip;
@@ -160,12 +162,12 @@ class Range implements \Iterator, \Countable
 
 	/**
 	 * @param IP $ip
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function setLastIP(IP $ip)
 	{
 		if ($this->firstIP && strcmp($ip->inAddr(), $this->firstIP->inAddr()) < 0) {
-			throw new \Exception('Last IP is less than first');
+			throw new RangeException('Last IP is less than first');
 		}
 
 		$this->lastIP = $ip;

@@ -1,6 +1,9 @@
 <?php
 namespace IPTools;
 
+use IPTools\Exception\RangeException;
+use ReturnTypeWillChange;
+
 /**
  * @author Joe Huss <detain@interserver.net>
  * @author Safarov Alisher <alisher.safarov@outlook.com>
@@ -26,7 +29,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @param IP $firstIP
 	 * @param IP $lastIP
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function __construct(IP $firstIP, IP $lastIP)
 	{
@@ -62,7 +65,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @param IP|Network|Range $find
 	 * @return bool
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function contains($find)
 	{
@@ -79,7 +82,7 @@ class Range implements \Iterator, \Countable
 			$within = (strcmp($find->getFirstIP()->inAddr(), $this->firstIP->inAddr()) >= 0)
 				&& (strcmp($find->getLastIP()->inAddr(), $this->lastIP->inAddr()) <= 0);
 		} else {
-			throw new \Exception('Invalid type');
+			throw new RangeException('Invalid type');
 		}
 
 		return $within;
@@ -147,12 +150,12 @@ class Range implements \Iterator, \Countable
 
 	/**
 	 * @param IP $ip
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function setFirstIP(IP $ip)
 	{
 		if ($this->lastIP && strcmp($ip->inAddr(), $this->lastIP->inAddr()) > 0) {
-			throw new \Exception('First IP is grater than second');
+			throw new RangeException('First IP is grater than second');
 		}
 
 		$this->firstIP = $ip;
@@ -160,12 +163,12 @@ class Range implements \Iterator, \Countable
 
 	/**
 	 * @param IP $ip
-	 * @throws \Exception
+	 * @throws RangeException
 	 */
 	public function setLastIP(IP $ip)
 	{
 		if ($this->firstIP && strcmp($ip->inAddr(), $this->firstIP->inAddr()) < 0) {
-			throw new \Exception('Last IP is less than first');
+			throw new RangeException('Last IP is less than first');
 		}
 
 		$this->lastIP = $ip;
@@ -250,6 +253,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @return IP
 	 */
+	#[ReturnTypeWillChange]
 	public function current()
 	{
 		return $this->firstIP->next($this->position);
@@ -258,16 +262,25 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @return int
 	 */
+	#[ReturnTypeWillChange]
 	public function key()
 	{
 		return $this->position;
 	}
 
+    /**
+     * @return void
+     */
+	#[ReturnTypeWillChange]
 	public function next()
 	{
 		++$this->position;
 	}
 
+    /**
+     * @return void
+     */
+	#[ReturnTypeWillChange]
 	public function rewind()
 	{
 		$this->position = 0;
@@ -276,6 +289,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @return bool
 	 */
+	#[ReturnTypeWillChange]
 	public function valid()
 	{
 		return strcmp($this->firstIP->next($this->position)->inAddr(), $this->lastIP->inAddr()) <= 0;
@@ -284,6 +298,7 @@ class Range implements \Iterator, \Countable
 	/**
 	 * @return int
 	 */
+	#[ReturnTypeWillChange]
 	public function count()
 	{
 		return (integer)bcadd(bcsub($this->lastIP->toLong(), $this->firstIP->toLong()), 1);
